@@ -1,0 +1,69 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:System03.Editor.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="System03.Editor.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="System03 Editor">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <DockPanel>
+        <!-- Menu Bar -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New"/>
+                <MenuItem Header="Open"/>
+                <MenuItem Header="Save"/>
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+            
+            <MenuItem Header="Edit">
+                <MenuItem Header="Undo"/>
+                <MenuItem Header="Redo"/>
+                <MenuItem Header="Cut"/>
+                <MenuItem Header="Copy"/>
+                <MenuItem Header="Paste"/>
+            </MenuItem>
+            
+            <MenuItem Header="Help">
+                <MenuItem Header="Documentation"/>
+                <MenuItem Header="About System03"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Main Content -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" MinWidth="200"/> <!-- Left panel -->
+                <ColumnDefinition Width="5"/> <!-- Splitter -->
+                <ColumnDefinition Width="*"/> <!-- Right panel -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Entity List (Left Panel) -->
+            <Border Grid.Column="0">
+                <ListBox Name="EntityList">
+                    <!-- Bind your entities here -->
+                    <ListBoxItem>Entity 1</ListBoxItem>
+                    <ListBoxItem>Entity 2</ListBoxItem>
+                    <ListBoxItem>Entity 3</ListBoxItem>
+                </ListBox>
+            </Border>
+
+            <!-- Gripper for resizing -->
+            <GridSplitter Grid.Column="1"/>
+
+            <!-- Game View (Right Panel) -->
+            <Border Grid.Column="2">
+                <ContentControl Name="GameView">
+                    <!-- OpenGL surface will be rendered here -->
+                </ContentControl>
+            </Border>
+        </Grid>
+    </DockPanel>
+</Window>

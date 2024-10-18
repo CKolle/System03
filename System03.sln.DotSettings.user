@@ -1,0 +1,42 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=00c63483_002D091a_002D4937_002Dab09_002Dd64200bf024e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GameLoopTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::B0911A3A-80E3-4A4A-A453-AF3D16F727C4::net8.0::System03.Tests.Core.GameLoopTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=09bb3bc8_002D51c4_002D4447_002Dabba_002D1072f2439d6b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Constructor_DefaultValues_AreCorrect" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::B0911A3A-80E3-4A4A-A453-AF3D16F727C4::net8.0::System03.Tests.Core.ConfigurationTests.Constructor_DefaultValues_AreCorrect&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=37a35547_002D8a65_002D49b7_002Dabbb_002Ddbf682cd850b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="EngineTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::B0911A3A-80E3-4A4A-A453-AF3D16F727C4::net8.0::System03.Tests.Core.EngineTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=48fd6e4c_002Daf09_002D4bc5_002Db788_002D8079227e6336/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="EngineTests #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::B0911A3A-80E3-4A4A-A453-AF3D16F727C4::net8.0::System03.Tests.Core.EngineTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=550c5a6b_002Dcfe7_002D4d19_002Daa2a_002Da811b167b745/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Start_InvalidTargetFPS_ThrowsException" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Project Location="/home/christopher/RiderProjects/System03/System03.Tests" Presentation="&amp;lt;System03.Tests&amp;gt;" /&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6dd1c0f3_002D4984_002D43fb_002Db499_002D8a48c6bc0612/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ConfigurationTests #4" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::B0911A3A-80E3-4A4A-A453-AF3D16F727C4::net8.0::System03.Tests.Core.ConfigurationTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=cb6d1a40_002Db496_002D4eb5_002Da011_002D66fed6af79ca/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ConfigurationTests #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::B0911A3A-80E3-4A4A-A453-AF3D16F727C4::net8.0::System03.Tests.Core.ConfigurationTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=cf53c35b_002Ddb42_002D42d3_002Db36c_002D813d0ba8be90/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ConfigurationTests #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::B0911A3A-80E3-4A4A-A453-AF3D16F727C4::net8.0::System03.Tests.Core.ConfigurationTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=fab6779b_002D6794_002D4ab5_002D9c3f_002D4ac8e2ec5a47/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ConfigurationTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Project Location="/home/christopher/RiderProjects/System03/System03.Tests" Presentation="&amp;lt;System03.Tests&amp;gt;" /&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
