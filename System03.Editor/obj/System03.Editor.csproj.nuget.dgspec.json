@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/christopher/RiderProjects/System03/System03.Editor/System03.Editor.csproj": {}
+    "/home/christopher/Dokumenter/uis/dat240/System03/System03.Editor/System03.Editor.csproj": {}
   },
   "projects": {
-    "/home/christopher/RiderProjects/System03/System03.Editor/System03.Editor.csproj": {
+    "/home/christopher/Dokumenter/uis/dat240/System03/System03.Editor/System03.Editor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/christopher/RiderProjects/System03/System03.Editor/System03.Editor.csproj",
+        "projectUniqueName": "/home/christopher/Dokumenter/uis/dat240/System03/System03.Editor/System03.Editor.csproj",
         "projectName": "System03.Editor",
-        "projectPath": "/home/christopher/RiderProjects/System03/System03.Editor/System03.Editor.csproj",
+        "projectPath": "/home/christopher/Dokumenter/uis/dat240/System03/System03.Editor/System03.Editor.csproj",
         "packagesPath": "/home/christopher/.nuget/packages/",
-        "outputPath": "/home/christopher/RiderProjects/System03/System03.Editor/obj/",
+        "outputPath": "/home/christopher/Dokumenter/uis/dat240/System03/System03.Editor/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/christopher/.nuget/NuGet/NuGet.Config"
@@ -79,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.110/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

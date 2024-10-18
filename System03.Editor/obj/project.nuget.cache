@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZeNmuulT+Xk=",
+  "dgSpecHash": "/kcjcNKsdk4=",
   "success": true,
-  "projectFilePath": "/home/christopher/RiderProjects/System03/System03.Editor/System03.Editor.csproj",
+  "projectFilePath": "/home/christopher/Dokumenter/uis/dat240/System03/System03.Editor/System03.Editor.csproj",
   "expectedPackageFiles": [
     "/home/christopher/.nuget/packages/avalonia/11.1.0/avalonia.11.1.0.nupkg.sha512",
     "/home/christopher/.nuget/packages/avalonia.angle.windows.natives/2.1.22045.20230930/avalonia.angle.windows.natives.2.1.22045.20230930.nupkg.sha512",

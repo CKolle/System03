@@ -16,14 +16,14 @@ public class Engine
         Configuration = config;
         IsInitialized = true;
     }
-    
+
+    public void Start()
+    {
+        
+    }
     public void Shutdown()
     {
         
     }
-
-    public void Dispose()
-    {
-        throw new NotImplementedException();
-    }
+    
 }
