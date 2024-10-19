@@ -1,14 +1,23 @@
 using System03.Core;
+using System03.Windowing.Abstractions;
+using OpenTK.Graphics.OpenGL;
+using OpenTK.Windowing.GraphicsLibraryFramework;
+using System03.Rendering.Graphics;
 
 namespace System03.Rendering.OpenGL;
 
-public class Renderer(IWindow window, IOpenGLContext context) : IRenderer
+public class Renderer : IRenderer
 {
-    private readonly IWindow _window = window;
-    private readonly IOpenGLContext _context = context;
-
+    public Renderer(IGraphicsContext contextBase)
+    {
+        contextBase.MakeCurrent();
+        GL.LoadBindings(contextBase);
+    }
     public void Render()
     {
-        throw new NotImplementedException();
+        // Lets just make the screen red for no
+        GL.ClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+        GL.Clear(ClearBufferMask.ColorBufferBit);
+        
     }
 }

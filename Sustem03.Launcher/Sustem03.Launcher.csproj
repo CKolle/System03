@@ -1,18 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>Launcher</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="FileFormats\" />
-      <Folder Include="Graphics\" />
+      <ProjectReference Include="..\System03\System03.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="OpenTK" Version="4.8.2" />
+      <Folder Include="Platform\" />
     </ItemGroup>
 
 </Project>

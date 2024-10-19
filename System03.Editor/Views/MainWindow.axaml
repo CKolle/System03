@@ -3,6 +3,7 @@
         xmlns:vm="using:System03.Editor.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:System03.Editor.Controls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="System03.Editor.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -60,9 +61,8 @@
 
             <!-- Game View (Right Panel) -->
             <Border Grid.Column="2">
-                <ContentControl Name="GameView">
-                    <!-- OpenGL surface will be rendered here -->
-                </ContentControl>
+                <!-- OpenGL surface will be rendered here -->
+                <controls:OpenGLSurface Name="GameView" />
             </Border>
         </Grid>
     </DockPanel>
