@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using System03.Input;
 using System03.Windowing.Abstractions;
 using System03.Windowing.Native.X11;
 
@@ -6,13 +7,17 @@ namespace System03.Windowing.Platform
 {
     public sealed class X11WindowSystem : IWindowSystem
     {
-        private IntPtr _display;
-        private IntPtr _window;
+        internal IntPtr _display;
+        internal IntPtr _window;
         private X11Bindings.XVisualInfo _visualInfo;
         private IntPtr _visual;
         private int _screen;
         private int _height;
         private bool _disposed;
+        
+        // Lasy load the input devices and poll groups
+        private X11Keyboard? _keyboard;
+        private List<IPollGroup>? _pollGroups;
         
         public X11WindowSystem(int width, int height, bool isEmbedded)
         {
@@ -84,10 +89,12 @@ namespace System03.Windowing.Platform
             if (!isEmbedded)
             {
                 X11Bindings.MapWindow(_display, _window);
+
+                var event_mask = X11Bindings.EventMask.KeyPressMask | X11Bindings.EventMask.KeyReleaseMask;
+                X11Bindings.SelectInput(_display, _window, event_mask);
             }
 
             X11Bindings.Flush(_display);
-            
         }
 
         IntPtr IWindowSystem.NativeHandle()
@@ -109,8 +116,28 @@ namespace System03.Windowing.Platform
             
             while (X11Bindings.Pending(_display) > 0)
             {
-                X11Bindings.XEvent xEvent = default;
-                X11Bindings.NextEvent(_display, ref xEvent);
+                // Initialize all fields explicitly
+                var xEvent = new X11Bindings.XEvent
+                {
+                    serial = IntPtr.Zero,
+                    display = IntPtr.Zero,
+                    window = IntPtr.Zero,
+                    root = 0,
+                    subwindow = 0,
+                    time = 0,
+                    x = 0,
+                    y = 0,
+                    x_root = 0,
+                    y_root = 0,
+                    state = 0,
+                    keycode = 0,
+                    same_screen = false
+                };
+
+                // Pass the initialized struct by reference
+                IntPtr ptr = IntPtr.Zero;
+                X11Bindings.NextEvent(_display, ptr);
+                xEvent = Marshal.PtrToStructure<X11Bindings.XEvent>(ptr);
                 if (xEvent.type == X11Bindings.XEventName.KeyPress)
                 {
                     return true;
@@ -120,7 +147,6 @@ namespace System03.Windowing.Platform
             return false;
         }
         
-
         public void Shutdown()
         {
             Dispose();
@@ -145,11 +171,21 @@ namespace System03.Windowing.Platform
             _disposed = true;
         }
 
-        public IntPtr NativeDisplay() => _display;
-
-        ~X11WindowSystem()
+        public List<IInputDevice> GetInputDevices()
         {
-            Dispose();
+            _keyboard ??= new X11Keyboard(_display);
+
+            return [_keyboard];
         }
+        
+        public List<IPollGroup> GetPollGroups()
+        {   
+            _keyboard ??= new X11Keyboard(_display);
+            _pollGroups ??= [new X11PollGroup(_display, _keyboard)];
+
+            return _pollGroups;
+        }
+        
+        public IntPtr NativeDisplay() => _display;
     }
 }

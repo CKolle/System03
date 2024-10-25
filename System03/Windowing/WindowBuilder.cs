@@ -21,9 +21,9 @@ public class WindowBuilder
         return this;
     }
 
-    public WindowBuilder AsEmbedded()
+    public WindowBuilder IsEmbedded(bool isEmbedded)
     {
-        _config = _config with { IsEmbedded = true };
+        _config = _config with { IsEmbedded = isEmbedded };
         return this;
     }
 
@@ -35,6 +35,7 @@ public class WindowBuilder
         {
             WindowBackend.X11 => new X11WindowSystem(_config.Width, _config.Height, _config.IsEmbedded),
             WindowBackend.Wayland => throw new NotImplementedException(),
+            WindowBackend.Windows => new Win32WindowSystem(),
             _ => throw new PlatformNotSupportedException()
         };
     }
@@ -42,12 +43,23 @@ public class WindowBuilder
 
     private static WindowBackend DetermineBackend()
     {
-        // If contains wayland in the environment variables, use Wayland
-        if (Environment.GetEnvironmentVariable("WAYLAND_DISPLAY") != null)
+        if (OperatingSystem.IsLinux())
         {
-            return WindowBackend.Wayland;
+            // If Wayland is in the environment variables, use Wayland
+            if (Environment.GetEnvironmentVariable("WAYLAND_DISPLAY") != null)
+            {
+                // Wayland is not implemented yet, so default to X11
+                return WindowBackend.X11;
+            }
+            // Default to X11 for Linux
+            return WindowBackend.X11;
         }
-        // Defaults to X11
-        return WindowBackend.X11;
+        if (OperatingSystem.IsWindows())
+        {
+            return WindowBackend.Windows;
+        }
+
+        throw new PlatformNotSupportedException("Unsupported platform");
     }
+
 }

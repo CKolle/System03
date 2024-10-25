@@ -8,7 +8,7 @@ namespace System03.Rendering.Graphics;
  */
 public interface IGraphicsContext : IDisposable, IBindingsContext
 {
-    void Initialize(IWindowSystem window);
+    void Initialize();
     void MakeCurrent();
     void SwapBuffers();
 }

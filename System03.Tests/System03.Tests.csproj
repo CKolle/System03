@@ -27,8 +27,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="FileFormats\" />
       <Folder Include="TestData\" />
+      <Folder Include="TestHelpers\Mocks\Input\" />
+      <Folder Include="TestHelpers\Mocks\Rendering\" />
+      <Folder Include="TestHelpers\Mocks\Window\" />
     </ItemGroup>
 
 </Project>

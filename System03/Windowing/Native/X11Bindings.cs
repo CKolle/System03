@@ -2,10 +2,10 @@ using System.Runtime.InteropServices;
 
 namespace System03.Windowing.Native.X11;
 
-internal sealed class X11Bindings
+internal static class X11Bindings
 {
-    const string LibraryName = "libX11.so.6";
-    
+    private const string LibraryName = "libX11.so.6";
+
     // Define the X event types
     public enum XEventName
     {
@@ -51,52 +51,85 @@ internal sealed class X11Bindings
         None = 0,
         All = 1
     }
-
+    [StructLayout(LayoutKind.Sequential, Size = (24 * sizeof(long)))]
+    public struct XAnyEvent
+    {
+        public XEventName type;
+        public nint serial;      // Changed from IntPtr
+        public bool send_event;
+        public nint display;     // Changed from IntPtr
+        public nint window;      // Changed from IntPtr
+    }
+    
+    [StructLayout(LayoutKind.Sequential, Size = (24 * sizeof(long)))]
+    public struct XKeyEvent
+    {
+        public XEventName type;
+        public nint serial;      // Changed from IntPtr
+        public bool send_event;
+        public nint display;     // Changed from IntPtr
+        public nint window;      // Changed from IntPtr
+        public nint root;
+        public nint subwindow;
+        public nint time;
+        public int x, y;
+        public int x_root, y_root;
+        public uint state;
+        public uint keycode;
+        public bool same_screen;
+    }
+    
     // Define the XEvent structure to handle events from the X server
+    // A XEvent is technically a union but we only use XKeyEvent
+    // Also since we don't have a size the allocation will crash the program
+    // TODO - This is not entirely correct but it works for now
     [StructLayout(LayoutKind.Sequential)]
     public struct XEvent
     {
+        [MarshalAs(UnmanagedType.I4)]
         public XEventName type;
-        public IntPtr serial;       // # of last request processed by server
-        public bool send_event;     // true if this came from SendEvent request
-        public IntPtr display;      // Display the event was read from
-        public IntPtr window;       // Window the event was reported on
-        public int root;            // Root window of the event
-        public int subwindow;       // Child window (if any)
-        public int time;            // Timestamp of the event
-        public int x, y;            // Coordinates of the event
-        public int x_root, y_root;  // Root window coordinates
-        public uint state;          // Key/button mask
-        public uint keycode;        // Key/button code
-        public bool same_screen;    // True if same screen
+        public nint serial;    
+        [MarshalAs(UnmanagedType.I1)]
+        public bool send_event;
+        public nint display;    
+        public nint window;     
+        public int root;
+        public int subwindow;
+        public int time;
+        public int x, y;
+        public int x_root, y_root;
+        public uint state;
+        public uint keycode;
+        [MarshalAs(UnmanagedType.I1)]
+        public bool same_screen;
     }
 
     // Struct for XWindowAttributes
     [StructLayout(LayoutKind.Sequential)]
     public struct XWindowAttributes
     {
-        public int x, y;                    // location of window
-        public int width, height;           // size of window
-        public int border_width;            // border width
-        public int depth;                   // depth of window
-        public IntPtr visual;               // the visual type
-        public IntPtr root;                 // the root window
-        public int class_hint;              // input/output class
+        public int x, y; // location of window
+        public int width, height; // size of window
+        public int border_width; // border width
+        public int depth; // depth of window
+        public IntPtr visual; // the visual type
+        public IntPtr root; // the root window
+        public int class_hint; // input/output class
         public int bit_gravity, win_gravity; // window gravity
-        public int backing_store;           // NotUseful, WhenMapped, Always
-        public ulong backing_planes;        // planes to be preserved if possible
-        public ulong backing_pixel;         // value to use in restoring planes
-        public bool save_under;             // should bits under be saved?
-        public IntPtr colormap;             // color map to be installed
-        public bool map_installed;          // boolean, is color map currently installed?
-        public int map_state;               // IsUnmapped, IsUnviewable, IsViewable
-        public long all_event_masks;        // all events that can be selected
-        public long your_event_mask;        // events selected by this client
-        public long do_not_propagate_mask;  // do not propagate these events
-        public bool override_redirect;      // boolean, should override redirect?
-        public IntPtr screen;               // the screen the window is on
+        public int backing_store; // NotUseful, WhenMapped, Always
+        public ulong backing_planes; // planes to be preserved if possible
+        public ulong backing_pixel; // value to use in restoring planes
+        public bool save_under; // should bits under be saved?
+        public IntPtr colormap; // color map to be installed
+        public bool map_installed; // boolean, is color map currently installed?
+        public int map_state; // IsUnmapped, IsUnviewable, IsViewable
+        public long all_event_masks; // all events that can be selected
+        public long your_event_mask; // events selected by this client
+        public long do_not_propagate_mask; // do not propagate these events
+        public bool override_redirect; // boolean, should override redirect?
+        public IntPtr screen; // the screen the window is on
     }
-    
+
     [StructLayout(LayoutKind.Sequential)]
     public struct XSetWindowAttributes
     {
@@ -116,7 +149,7 @@ internal sealed class X11Bindings
         public IntPtr colormap;
         public IntPtr cursor;
     }
-    
+
     [StructLayout(LayoutKind.Sequential)]
     public struct XVisualInfo
     {
@@ -131,10 +164,10 @@ internal sealed class X11Bindings
         public int colormap_size;
         public int bits_per_rgb;
     }
-    
+
     // Add the true color visual class
     public const int TrueColor = 4;
-    
+
     // InputOutput class
     public const uint InputOutput = 1;
 
@@ -144,12 +177,16 @@ internal sealed class X11Bindings
 
     // Create a simple window on the display
     [DllImport(LibraryName, EntryPoint = "XCreateSimpleWindow")]
-    public static extern IntPtr CreateSimpleWindow(IntPtr display, IntPtr parent, int x, int y, uint width, uint height, uint borderWidth, ulong border, ulong background);
+    public static extern IntPtr CreateSimpleWindow(IntPtr display, IntPtr parent, int x, int y, uint width, uint height,
+        uint borderWidth, ulong border, ulong background);
 
     // Get the root window of the display
     [DllImport(LibraryName, EntryPoint = "XDefaultRootWindow")]
     public static extern IntPtr DefaultRootWindow(IntPtr display);
-    
+
+    [DllImport(LibraryName, EntryPoint = "XLookupKeysym")]
+    public static extern uint LookupKeysym(ref XKeyEvent keyEvent, int index);
+
     [DllImport(LibraryName, EntryPoint = "XRootWindow")]
     public static extern IntPtr RootWindow(IntPtr display, int screenNumber);
 
@@ -163,11 +200,11 @@ internal sealed class X11Bindings
 
     // Get the next event from the event queue
     [DllImport(LibraryName, EntryPoint = "XNextEvent")]
-    public static extern void NextEvent(IntPtr display, ref XEvent ev);
+    public static extern void NextEvent(IntPtr display, IntPtr eventReturn);
 
     // Select input events for a window
     [DllImport(LibraryName, EntryPoint = "XSelectInput")]
-    public static extern void SelectInput(IntPtr display, IntPtr window, long eventMask);
+    public static extern void SelectInput(IntPtr display, IntPtr window, EventMask eventMask);
 
     // Get window attributes
     [DllImport(LibraryName, EntryPoint = "XGetWindowAttributes")]

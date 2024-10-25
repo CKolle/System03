@@ -8,10 +8,15 @@ public class EGLContext : IGraphicsContext
     private IntPtr _eglDisplay;
     private IntPtr _eglSurface;
     private IntPtr _eglContext;
+    private IWindowSystem _window;
 
-    public void Initialize(IWindowSystem window)
+    public EGLContext(IWindowSystem window)
     {
-        _eglDisplay = EGLBindings.GetDisplay(window.NativeDisplay());
+        _window = window;
+    }
+    public void Initialize()
+    {
+        _eglDisplay = EGLBindings.GetDisplay(_window.NativeDisplay());
         
         if (_eglDisplay == IntPtr.Zero)
         {
@@ -51,7 +56,7 @@ public class EGLContext : IGraphicsContext
         
         IntPtr eglConfig = configs[0];
         
-        _eglSurface = EGLBindings.CreateWindowSurface(_eglDisplay, eglConfig, window.NativeHandle(), null);
+        _eglSurface = EGLBindings.CreateWindowSurface(_eglDisplay, eglConfig, _window.NativeHandle(), null);
         if (_eglSurface == IntPtr.Zero)
         {
             int error = EGLBindings.GetError();
@@ -59,7 +64,8 @@ public class EGLContext : IGraphicsContext
         }
         
         // Create OpenGL context. We use ES 2.0 so it translates nicely to WebGL
-        int[] contextAttribs = { 0x3098, 2, 0x3038, 0 }; // EGL_CONTEXT_CLIENT_VERSION, 2 for OpenGL ES 2
+        // Well scrap that, we are using OpenGL ES 3.0, just remembered WebGL 2 exists
+        int[] contextAttribs = { 0x3098, 3, 0x3038, 0 }; // EGL_CONTEXT_CLIENT_VERSION, 2 for OpenGL ES 2
 
         _eglContext = EGLBindings.CreateContext(_eglDisplay, eglConfig, IntPtr.Zero, contextAttribs);
         if (_eglContext == IntPtr.Zero)
@@ -67,10 +73,12 @@ public class EGLContext : IGraphicsContext
             int error = EGLBindings.GetError();
             throw new InvalidOperationException($"Failed to create EGL context. Error: 0x{error:X}");
         }
+
     }
 
     public void Dispose()
     {
+        // TODO: Add bindings to destroy the context and surface
         
     }
 
@@ -81,6 +89,7 @@ public class EGLContext : IGraphicsContext
 
     public void SwapBuffers()
     {
+        EGLBindings.SwapInterval(_eglDisplay, 0);
         EGLBindings.SwapBuffers(_eglDisplay, _eglSurface);
     }
 

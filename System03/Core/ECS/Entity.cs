@@ -1,11 +1,6 @@
 namespace System03.Core.ECS;
 
-public struct Entity
+public readonly struct Entity(int id)
 {
-    public int Id { get; }
-    
-    public Entity(int id)
-    {
-        Id = id;
-    }
+    public int Id { get; } = id;
 }

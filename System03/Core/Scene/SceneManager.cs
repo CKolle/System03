@@ -2,12 +2,12 @@ namespace System03.Core.Scene;
 
 public class SceneManager
 {
-    private readonly Dictionary<string, Scene> _scenes = new();
-    private Scene? _activeScene;
+    private readonly Dictionary<string, BaseScene> _scenes = new();
+    private BaseScene? _activeScene;
 
-    public void RegisterScene(string name, Scene scene)
+    public void RegisterScene(string name, BaseScene baseScene)
     {
-        _scenes.Add(name, scene);
+        _scenes.Add(name, baseScene);
     }
 
     public void SetActiveScene(string name)

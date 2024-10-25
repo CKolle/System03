@@ -1,10 +1,12 @@
+using System;
 using System03.Core;
 
 namespace System03.Tests.Core;
 
+
 public class EngineTests
 {
-    private readonly Engine _engine = new Engine();
+    private readonly Engine _engine = new Engine(new OpenGLBuilder());
 
     [Fact]
     public void Initialize_WidthValidConfig_EngineInitializes()
@@ -17,7 +19,6 @@ public class EngineTests
         
         // Assert
         Assert.True(_engine.IsInitialized);
-        Assert.NotNull(_engine.ResourceManager);
     }
     
     [Fact]
@@ -29,6 +30,7 @@ public class EngineTests
         
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() => _engine.Initialize(config));
+        
     }
 
     public void Dispose()

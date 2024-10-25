@@ -4,6 +4,7 @@ namespace System03.Windowing.Native.EGL;
 
 internal sealed class EGLBindings
 {
+    // TODO - Add windows support for EGL bindings
     private const string LibraryName = "libEGL.so";
     
     public const int EGL_PLATFORM_WAYLAND_KHR = 0x31D8;
@@ -37,4 +38,7 @@ internal sealed class EGLBindings
     
     [DllImport(LibraryName, EntryPoint = "eglGetProcAddress")]
     public static extern IntPtr GetProcAddress(string procName);
+    
+    [DllImport(LibraryName, EntryPoint = "eglSwapInterval")]
+    public static extern bool SwapInterval(IntPtr dpy, int interval);
 }

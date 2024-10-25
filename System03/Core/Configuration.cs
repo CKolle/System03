@@ -18,6 +18,9 @@ public class Configuration
     public int DefaultResolutionWidth { get; set; } = 1920;
     public int DefaultResolutionHeight { get; set; } = 1080;
     public bool VSync { get; set; } = true;
+    
+    // TODO Move this out to the enginebuilder
+    public bool IsEmbedded { get; init; }
 
     public void SaveToFile(string path)
     {
